@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather app</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <title>firstApi</title>
+  </head>
+  <body>
+    <div class="login-box">
+      <div class="login-box__choose-tab">
+        <div
+          class="login-box__choose-tab__login"
+          onclick="tabsLoginBox.clickedLogin()"
+        >
+          <a>log in</a>
+        </div>
+        <div class="login-box__choose-tab__gap"></div>
+        <div
+          class="login-box__choose-tab__register"
+          onclick="tabsLoginBox.clickedRegister()"
+        >
+          <a>register</a>
+        </div>
+      </div>
+      <form class="login-box__register-form">
+        <input
+          class="login-box__register-form__username"
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Username"
+        />
+        <input
+          class="login-box__register-form__password"
+          type="text"
+          id="password"
+          name="password"
+          placeholder="Password"
+        />
+        <input
+          class="login-box__register-form__password2"
+          type="text"
+          id="password2"
+          name="password2"
+          placeholder="Confirm password"
+        />
+        <input
+          class="login-box__register-form__submit"
+          type="submit"
+          value="Register"
+        />
+      </form>
+      <form class="login-box__login-form">
+        <input
+          class="login-box__login-form__username"
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Username"
+        />
+        <input
+          class="login-box__login-form__password"
+          type="text"
+          id="password"
+          name="password"
+          placeholder="Password"
+        />
+        <input
+          class="login-box__login-form__submit"
+          type="submit"
+          value="Log in"
+        />
+      </form>
+    </div>
+    <footer class="footer">
+      <h4 class="footer__WS">Wojciech Szwarc</h4>
+      <div class="footer__contact-box">
+        <h4 class="footer__contact-box__title">meet me here:</h4>
+        <div class="footer__contact-box__icons-box">
+          <i class="footer__contact-box__icons-box__icon">icon</i>
+          <i class="footer__contact-box__icons-box__icon">icon</i>
+          <i class="footer__contact-box__icons-box__icon">icon</i>
+          <i class="footer__contact-box__icons-box__icon">icon</i>
+        </div>
+      </div>
+    </footer>
+    <script src="index.js"></script>
+  </body>
+</html>

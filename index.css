@@ -1,0 +1,177 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+  font-family: monospace;
+}
+
+body {
+  background-color: rgb(85, 85, 85);
+  background-image: url(images/rainglass.jpg);
+}
+
+.login-box {
+  height: 350px;
+  width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(59, 59, 59);
+  border-radius: 0 0 20px 20px;
+}
+.login-box__choose-tab {
+  font-weight: 100;
+  text-transform: uppercase;
+  color: antiquewhite;
+  font-size: 20px;
+  top: 0px;
+  transform: translate(0, -100%);
+  border-radius: 20px 20px 0 0;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.login-box__choose-tab__login {
+  cursor: pointer;
+  width: 50%;
+  background-color: rgb(59, 59, 59);
+  transition: background-color 1s ease;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-box__choose-tab__login::after {
+  content: "";
+  visibility: var(--loginVisibility, visible);
+  background-color: rgb(59, 59, 59);
+  transition: visibility 1s ease;
+  position: absolute;
+  right: calc(50% - 10px);
+  bottom: 0;
+  width: 10px;
+  height: 10px;
+}
+.login-box__choose-tab__register {
+  cursor: default;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px 10px 0 10px;
+  z-index: 1;
+  background-color: rgb(121, 120, 120);
+  transition: background-color 1s ease;
+}
+.login-box__choose-tab__register::before {
+  content: "";
+  visibility: var(--registerVisibility, hidden);
+  background-color: rgb(59, 59, 59);
+  transition: visibility 1s ease;
+  position: absolute;
+  right: 50%;
+  bottom: 0;
+  width: 10px;
+  height: 10px;
+}
+.login-box__register-form {
+  visibility: hidden;
+}
+.login-box__login-form, .login-box__register-form {
+  position: absolute;
+  top: 0;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.login-box__login-form__username, .login-box__register-form__username {
+  color: antiquewhite;
+  height: 40px;
+  width: 80%;
+  font-size: 18px;
+  padding: 0 10px 0 10px;
+  border-radius: 20px;
+  border: 2px solid rgb(121, 120, 120);
+  background-color: rgb(59, 59, 59);
+}
+.login-box__login-form__username:focus, .login-box__register-form__username:focus {
+  outline: 2px solid rgb(121, 120, 120);
+}
+.login-box__login-form__password, .login-box__register-form__password {
+  color: antiquewhite;
+  height: 40px;
+  width: 80%;
+  font-size: 18px;
+  padding: 0 10px 0 10px;
+  border-radius: 20px;
+  border: 2px solid rgb(121, 120, 120);
+  background-color: rgb(59, 59, 59);
+}
+.login-box__login-form__password:focus, .login-box__register-form__password:focus {
+  outline: 2px solid rgb(121, 120, 120);
+}
+.login-box__login-form__password2, .login-box__register-form__password2 {
+  color: antiquewhite;
+  height: 40px;
+  width: 80%;
+  font-size: 18px;
+  padding: 0 10px 0 10px;
+  border-radius: 20px;
+  border: 2px solid rgb(121, 120, 120);
+  background-color: rgb(59, 59, 59);
+}
+.login-box__login-form__password2:focus, .login-box__register-form__password2:focus {
+  outline: 2px solid rgb(121, 120, 120);
+}
+.login-box__login-form__submit, .login-box__register-form__submit {
+  cursor: pointer;
+  color: rgb(59, 59, 59);
+  margin-top: 20px;
+  height: 40px;
+  width: calc(80% + 20px);
+  font-size: 18px;
+  padding: 0 10px 0 10px;
+  border-radius: 20px;
+  background-color: rgb(121, 120, 120);
+  text-transform: uppercase;
+}
+
+.footer {
+  width: 100%;
+  height: 70px;
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.322);
+  display: flex;
+  gap: 100px;
+  align-items: center;
+  justify-content: center;
+  color: antiquewhite;
+}
+.footer__WS {
+  font-size: 20px;
+  font-weight: 100;
+  text-transform: uppercase;
+}
+.footer__contact-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer__contact-box__title {
+  font-size: 16px;
+  font-weight: 100;
+  text-transform: uppercase;
+}
+.footer__contact-box__icons-box {
+  display: flex;
+  gap: 30px;
+}/*# sourceMappingURL=index.css.map */
