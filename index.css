@@ -34,7 +34,7 @@ body {
   justify-content: space-between;
 }
 .login-box__choose-tab__login {
-  cursor: pointer;
+  cursor: default;
   width: 50%;
   background-color: rgb(59, 59, 59);
   transition: background-color 1s ease;
@@ -55,7 +55,7 @@ body {
   height: 10px;
 }
 .login-box__choose-tab__register {
-  cursor: default;
+  cursor: pointer;
   width: 50%;
   display: flex;
   justify-content: center;
@@ -141,6 +141,13 @@ body {
   background-color: rgb(121, 120, 120);
   text-transform: uppercase;
 }
+.login-box__login-form__submit:hover, .login-box__register-form__submit:hover {
+  font-size: 20px;
+  scale: 0.95;
+}
+.login-box__login-form__submit:active, .login-box__register-form__submit:active {
+  font-size: 18px;
+}
 
 .footer {
   width: 100%;
@@ -173,5 +180,11 @@ body {
 }
 .footer__contact-box__icons-box {
   display: flex;
+  align-items: center;
   gap: 30px;
+  height: 20px;
+}
+.footer__contact-box__icons-box__icon:hover {
+  cursor: pointer;
+  scale: 1.1;
 }/*# sourceMappingURL=index.css.map */
