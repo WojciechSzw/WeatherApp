@@ -1,3 +1,7 @@
+const Endpoints = {
+  login: "",
+};
+
 const tabsLoginBox = {
   loginBoxColor: "rgb(59, 59, 59)",
   loginBoxNotchosenColor: "rgb(121, 120, 120)",
@@ -29,12 +33,15 @@ const tabsLoginBox = {
     this.registerBox.style.backgroundColor = this.loginBoxNotchosenColor;
     this.registerBox.style.borderRadius = "10px 10px 0 10px";
     this.registerBox.style.cursor = "pointer";
-    //this.registerBox.style.setProperty("--registerVisibility", "hidden");
+    //
+    this.registerBox.style.setProperty("--registerVisibility", "hidden");
 
     this.loginBox.style.backgroundColor = this.loginBoxColor;
     this.loginBox.style.cursor = "default";
     this.loginBox.style.borderRadius = "10px 10px 0 0";
+    //
     this.loginBox.style.setProperty("--loginVisibility", "visible");
+
     this.loginBox.style.zIndex = "0";
   },
   clickedRegister: function () {
@@ -57,7 +64,11 @@ const tabsLoginBox = {
     this.registerBox.style.backgroundColor = this.loginBoxColor;
     this.registerBox.style.cursor = "default";
     this.registerBox.style.borderRadius = "10px 10px 0 0";
-    //this.registerBox.style.setProperty("--registerVisibility", "visible");
+    this.registerBox.style.setProperty("--registerVisibility", "visible");
     this.registerBox.style.zIndex = "0";
   },
 };
+
+function login() {
+  fetch;
+}

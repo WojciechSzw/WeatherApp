@@ -148,6 +148,12 @@ body {
 .login-box__login-form__submit:active, .login-box__register-form__submit:active {
   font-size: 18px;
 }
+.login-box__login-form__wrongUsernamePassword, .login-box__register-form__wrongUsernamePassword {
+  color: red;
+  font-size: 15px;
+  font-weight: 100;
+  visibility: hidden;
+}
 
 .footer {
   width: 100%;
