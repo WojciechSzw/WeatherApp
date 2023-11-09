@@ -1,6 +1,10 @@
 "use strict";
 const Endpoints = {
-    login: "",
+    login: "http://localhost:3000/login",
+    register: "http://localhost:3000/register",
+    logout: "http://localhost:3000/logout",
+    refreshToken: "http://localhost:3000/token",
+    weatherLinks: "http://localhost:3000/weather",
 };
 const tabsLoginBox = {
     loginBoxColor: "rgb(59, 59, 59)",
@@ -51,5 +55,22 @@ const tabsLoginBox = {
     },
 };
 function login() {
-    fetch;
+    const username = document.querySelector(".login-box__login-form__username");
+    const password = document.querySelector(".login-box__login-form__password");
+    if (username === null || password === null)
+        return;
+    const loginInfo = {
+        username: username.value,
+        password: password.value,
+    };
+    fetch(Endpoints.login, {
+        method: "POST",
+        body: JSON.stringify(loginInfo),
+    }).then((response) => {
+        // Handle the response
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        console.log(response.json());
+    });
 }

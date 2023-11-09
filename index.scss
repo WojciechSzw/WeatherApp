@@ -39,7 +39,7 @@ body {
       cursor: default;
       width: 50%;
       background-color: $login-box-color;
-      transition: background-color 1s ease;
+      //transition: background-color 0.2s ease;
       border-radius: 10px 10px 0 0;
       display: flex;
       justify-content: center;
@@ -49,7 +49,6 @@ body {
         content: "";
         visibility: var(--loginVisibility, visible);
         background-color: $login-box-color;
-        transition: visibility 1s ease;
         position: absolute;
         right: calc(50% - 10px);
         bottom: 0;
@@ -66,12 +65,11 @@ body {
       border-radius: 10px 10px 0 10px;
       z-index: 1;
       background-color: $login-box-notchosen-color;
-      transition: background-color 1s ease;
+      //transition: background-color 0.2s ease;
       &::before {
         content: "";
         visibility: var(--registerVisibility, hidden);
         background-color: $login-box-color;
-        transition: visibility 1s ease;
         position: absolute;
         right: 50%;
         bottom: 0;

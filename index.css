@@ -37,7 +37,6 @@ body {
   cursor: default;
   width: 50%;
   background-color: rgb(59, 59, 59);
-  transition: background-color 1s ease;
   border-radius: 10px 10px 0 0;
   display: flex;
   justify-content: center;
@@ -47,7 +46,6 @@ body {
   content: "";
   visibility: var(--loginVisibility, visible);
   background-color: rgb(59, 59, 59);
-  transition: visibility 1s ease;
   position: absolute;
   right: calc(50% - 10px);
   bottom: 0;
@@ -63,13 +61,11 @@ body {
   border-radius: 10px 10px 0 10px;
   z-index: 1;
   background-color: rgb(121, 120, 120);
-  transition: background-color 1s ease;
 }
 .login-box__choose-tab__register::before {
   content: "";
   visibility: var(--registerVisibility, hidden);
   background-color: rgb(59, 59, 59);
-  transition: visibility 1s ease;
   position: absolute;
   right: 50%;
   bottom: 0;
