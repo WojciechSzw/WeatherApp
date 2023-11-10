@@ -54,6 +54,7 @@ const tabsLoginBox = {
         this.registerBox.style.zIndex = "0";
     },
 };
+const loginButton = document.querySelector(".login-box__login-form__submit");
 function login() {
     const username = document.querySelector(".login-box__login-form__username");
     const password = document.querySelector(".login-box__login-form__password");
@@ -67,14 +68,21 @@ function login() {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify(loginInfo),
-    }).then((response) => {
+    })
+        .then((response) => {
         // Handle the response
         if (!response.ok) {
             throw new Error(`Network response was not ok: ${response.statusText}`);
         }
-        console.log(response.json());
+        getWeather(response.json());
+        // return response.json();
+    })
+        .then((data) => {
+        // console.log(data);
     });
+}
+function getWeather(res) {
+    console.log(res);
 }

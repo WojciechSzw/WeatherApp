@@ -4,7 +4,7 @@ const Endpoints = {
   logout: "http://localhost:3000/logout",
   refreshToken: "http://localhost:3000/token",
   weatherLinks: "http://localhost:3000/weather",
-};
+} as const;
 
 const tabsLoginBox = {
   loginBoxColor: "rgb(59, 59, 59)",
@@ -73,6 +73,8 @@ const tabsLoginBox = {
   },
 };
 
+const loginButton = document.querySelector(".login-box__login-form__submit");
+
 function login() {
   const username = document.querySelector<HTMLInputElement>(
     ".login-box__login-form__username"
@@ -90,14 +92,22 @@ function login() {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: JSON.stringify(loginInfo),
-  }).then((response) => {
-    // Handle the response
-    if (!response.ok) {
-      throw new Error(`Network response was not ok: ${response.statusText}`);
-    }
-    console.log(response.json());
-  });
+  })
+    .then((response) => {
+      // Handle the response
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      getWeather(response.json());
+      // return response.json();
+    })
+    .then((data) => {
+      // console.log(data);
+    });
+}
+
+function getWeather(res: object) {
+  console.log(res);
 }
