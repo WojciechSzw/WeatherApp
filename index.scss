@@ -11,6 +11,8 @@ $login-box-notchosen-color: rgb(121, 120, 120);
 body {
   background-color: rgb(85, 85, 85);
   background-image: url(images/rainglass.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .login-box {

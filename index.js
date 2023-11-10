@@ -65,6 +65,10 @@ function login() {
     };
     fetch(Endpoints.login, {
         method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
         body: JSON.stringify(loginInfo),
     }).then((response) => {
         // Handle the response
