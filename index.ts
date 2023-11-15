@@ -6,6 +6,9 @@ const Endpoints = {
   weatherLinks: "http://localhost:3000/weather",
 } as const;
 
+let accessToken = "";
+let refreshToken = "";
+
 const tabsLoginBox = {
   loginBoxColor: "rgb(59, 59, 59)",
   loginBoxNotchosenColor: "rgb(121, 120, 120)",
@@ -100,14 +103,15 @@ function login() {
       if (!response.ok) {
         throw new Error(`Network response was not ok: ${response.statusText}`);
       }
-      getWeather(response.json());
-      // return response.json();
+      return response.json() as Promise<{ accessToken: string }>;
     })
     .then((data) => {
-      // console.log(data);
+      console.log(data);
+      getWeather(data as any);
     });
 }
 
-function getWeather(res: object) {
-  console.log(res);
+function getWeather(data: { accessToken: string; refreshToken: string }) {
+  console.log(data.accessToken);
+  console.log(data.refreshToken);
 }
