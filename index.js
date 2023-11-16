@@ -88,4 +88,19 @@ function login() {
 function getWeather(data) {
     console.log(data.accessToken);
     console.log(data.refreshToken);
+    fetch(Endpoints.weatherLinks, {
+        method: "GET",
+        headers: {
+            authorization: data.accessToken,
+        },
+    })
+        .then((response) => {
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.json();
+    })
+        .then((data) => {
+        console.log(data);
+    });
 }
