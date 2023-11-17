@@ -6,8 +6,7 @@ const Endpoints = {
   weatherLinks: "http://localhost:3000/weather",
 } as const;
 
-let accessToken = "";
-let refreshToken = "";
+let tokensData: { accessToken: string; refreshToken: string };
 
 const tabsLoginBox = {
   loginBoxColor: "rgb(59, 59, 59)",
@@ -106,19 +105,19 @@ function login() {
       return response.json() as Promise<{ accessToken: string }>;
     })
     .then((data) => {
-      console.log(data);
-      getWeather(data as any);
+      tokensData = data as any;
+      getWeather();
     });
 }
 
-function getWeather(data: { accessToken: string; refreshToken: string }) {
-  console.log(data.accessToken);
-  console.log(data.refreshToken);
+function getWeather() {
+  console.log(tokensData.accessToken);
+  console.log(tokensData.refreshToken);
 
   fetch(Endpoints.weatherLinks, {
     method: "GET",
     headers: {
-      authorization: data.accessToken,
+      authorization: tokensData.accessToken,
     },
   })
     .then((response) => {

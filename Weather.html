@@ -3,8 +3,138 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather app</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyWeather</title>
+    <link rel="stylesheet" href="weather.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
-  <body></body>
+  <body>
+    <aside class="menu">
+      <div class="menu__short">
+        <div class="menu__short__upper">
+          <img
+            src="images/users/NoFoto.jpg"
+            alt="userfoto"
+            width="60px"
+            height="60px"
+          />
+          <hr />
+        </div>
+        <div class="menu__short__middle">
+          <i class="fa-solid fa-plus fa-3x"></i>
+          <i class="fa-solid fa-plus fa-3x"></i
+          ><i class="fa-solid fa-plus fa-3x"></i
+          ><i class="fa-solid fa-plus fa-3x"></i>
+        </div>
+        <div class="menu__short__lower">
+          <hr />
+          <i class="fa-solid fa-gears fa-3x"></i>
+        </div>
+      </div>
+      <div class="menu__expandable"></div>
+    </aside>
+    <div class="main">
+      <div class="main__weather-box">
+        <div class="main__weather-box__today-info">
+          <img
+            class="main__weather-box__today-info__symbol"
+            src="images/weathericons/sunny.jpg"
+            alt="weathericon"
+            height="60px"
+            width="60px"
+          />
+          <p class="main__weather-box__today-info__cityName">Poznań</p>
+          <p class="main__weather-box__today-info__date">
+            friday, 17 noveber 17:00
+          </p>
+          <hr class="main__weather-box__today-info__hr1" />
+          <p class="main__weather-box__today-info__actualTemperature">20°</p>
+          <div class="main__weather-box__today-info__rain">
+            <i class="fa-solid fa-umbrella fa-xl"></i>
+            <p>30%</p>
+          </div>
+          <div class="main__weather-box__today-info__wind">
+            <i class="fa-solid fa-wind fa-xl"></i>
+            <p>30km/h</p>
+          </div>
+          <hr class="main__weather-box__today-info__hr2" />
+          <div class="main__weather-box__today-info__hourlyWeather">
+            <div class="main__weather-box__today-info__hourlyWeather__legend">
+              <i class="fa-solid fa-umbrella"></i
+              ><i class="fa-solid fa-temperature-quarter"></i>
+              <hr />
+              <i class="fa-regular fa-clock"></i>
+            </div>
+            <div class="main__weather-box__today-info__hourlyWeather__hourbox">
+              <p>2%</p>
+              <p>20°</p>
+              <hr />
+              <p>6:00</p>
+            </div>
+            <div class="main__weather-box__today-info__hourlyWeather__hourbox">
+              <p>2%</p>
+              <p>20°</p>
+              <hr />
+              <p>10:00</p>
+            </div>
+            <div class="main__weather-box__today-info__hourlyWeather__hourbox">
+              <p>2%</p>
+              <p>20°</p>
+              <hr />
+              <p>14:00</p>
+            </div>
+            <div class="main__weather-box__today-info__hourlyWeather__hourbox">
+              <p>2%</p>
+              <p>20°</p>
+              <hr />
+              <p>18:00</p>
+            </div>
+            <div class="main__weather-box__today-info__hourlyWeather__hourbox">
+              <p>2%</p>
+              <p>20°</p>
+              <hr />
+              <p>22:00</p>
+            </div>
+          </div>
+        </div>
+        <div class="main__weather-box__nextdays-info">
+          <div class="main__weather-box__nextdays-info__dayinfo">
+            <p>sat</p>
+            <hr />
+            <p>10°</p>
+            <p>10%</p>
+          </div>
+          <div class="main__weather-box__nextdays-info__dayinfo">
+            <p>sat</p>
+            <hr />
+            <p>10°</p>
+            <p>10%</p>
+          </div>
+          <div class="main__weather-box__nextdays-info__dayinfo">
+            <p>sat</p>
+            <hr />
+            <p>10°</p>
+            <p>10%</p>
+          </div>
+          <div class="main__weather-box__nextdays-info__dayinfo">
+            <p>sat</p>
+            <hr />
+            <p>10°</p>
+            <p>10%</p>
+          </div>
+          <div class="main__weather-box__nextdays-info__dayinfo">
+            <p>sat</p>
+            <hr />
+            <p>10°</p>
+            <p>10%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
