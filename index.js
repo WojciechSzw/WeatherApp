@@ -1,12 +1,17 @@
-"use strict";
-const Endpoints = {
+var _a;
+export const Endpoints = {
     login: "http://localhost:3000/login",
     register: "http://localhost:3000/register",
     logout: "http://localhost:3000/logout",
     refreshToken: "http://localhost:3000/token",
     weatherLinks: "http://localhost:3000/weather",
 };
-let tokensData;
+export const tokensData = {
+    accessToken: "1",
+    refreshToken: "2",
+};
+(_a = document
+    .querySelector(".login-box__login-form__submit")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", login);
 const tabsLoginBox = {
     loginBoxColor: "rgb(59, 59, 59)",
     loginBoxNotchosenColor: "rgb(121, 120, 120)",
@@ -80,26 +85,11 @@ function login() {
         return response.json();
     })
         .then((data) => {
-        tokensData = data;
-        getWeather();
+        tokensData.accessToken = data.accessToken;
+        goToWeatherhtml();
     });
 }
-function getWeather() {
-    console.log(tokensData.accessToken);
-    console.log(tokensData.refreshToken);
-    fetch(Endpoints.weatherLinks, {
-        method: "GET",
-        headers: {
-            authorization: tokensData.accessToken,
-        },
-    })
-        .then((response) => {
-        if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.statusText}`);
-        }
-        return response.json();
-    })
-        .then((data) => {
-        console.log(data);
-    });
+function goToWeatherhtml() {
+    window.location.href = "weather.html";
+    console.log(tokensData);
 }

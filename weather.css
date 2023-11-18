@@ -12,12 +12,6 @@ body {
   background-repeat: no-repeat;
 }
 
-i:hover {
-  cursor: pointer;
-  scale: 1.05;
-  transition: all ease-in 100ms;
-}
-
 .menu {
   position: fixed;
   top: 5%;
@@ -106,31 +100,25 @@ i:hover {
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  background-color: black;
+  background-image: url(images/backgrounds/cloud-blue-sky.jpg);
 }
 .main__weather-box__today-info {
   display: grid;
   width: 100%;
   height: 320px;
-  background-color: grey;
+  background-color: rgba(128, 128, 128, 0.51);
   border-radius: 10px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 0.4fr 2px 0.8fr 1fr 2px 1.8fr;
   gap: 0px 0px;
   gap: 0px 0px;
-  grid-template-areas: "symbol symbol cityname cityname cityname cityname" "date date date date date date" "hr1 hr1 hr1 hr1 hr1 hr1" "actualTemperature actualTemperature actualTemperature actualTemperature actualTemperature actualTemperature" "rain rain rain wind wind wind" "hr2 hr2 hr2 hr2 hr2 hr2" "hourlyWeather hourlyWeather hourlyWeather hourlyWeather hourlyWeather hourlyWeather";
-}
-.main__weather-box__today-info__symbol {
-  grid-area: symbol;
-  border-radius: 50%;
-  margin-top: 5px;
-  margin-left: 5px;
+  grid-template-areas: "cityname cityname cityname cityname cityname cityname" "date date date date date date" "hr1 hr1 hr1 hr1 hr1 hr1" "actualTemperature actualTemperature actualTemperature actualTemperature actualTemperature actualTemperature" "rain rain rain wind wind wind" "hr2 hr2 hr2 hr2 hr2 hr2" "hourlyWeather hourlyWeather hourlyWeather hourlyWeather hourlyWeather hourlyWeather";
 }
 .main__weather-box__today-info__cityName {
   grid-area: cityname;
   font-size: 30px;
-  color: rgb(135, 175, 220);
-  margin-left: -20px;
+  color: rgb(22, 37, 54);
+  margin: auto;
   margin-top: 18px;
 }
 .main__weather-box__today-info__date {
@@ -138,7 +126,7 @@ i:hover {
   grid-area: date;
   width: 100%;
   text-align: center;
-  color: rgb(135, 175, 220);
+  color: rgb(22, 37, 54);
 }
 .main__weather-box__today-info__hr1 {
   grid-area: hr1;
@@ -151,9 +139,9 @@ i:hover {
 }
 .main__weather-box__today-info__actualTemperature {
   grid-area: actualTemperature;
-  margin: auto;
-  font-size: 30px;
-  color: rgb(135, 175, 220);
+  margin: 20px auto auto;
+  font-size: 34px;
+  color: rgb(22, 37, 54);
 }
 .main__weather-box__today-info__rain {
   grid-area: rain;
@@ -162,7 +150,7 @@ i:hover {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  color: rgb(135, 175, 220);
+  color: rgb(22, 37, 54);
 }
 .main__weather-box__today-info__rain > p {
   font-size: 20px;
@@ -174,7 +162,7 @@ i:hover {
   justify-content: center;
   align-items: center;
   gap: 5px;
-  color: rgb(135, 175, 220);
+  color: rgb(22, 37, 54);
 }
 .main__weather-box__today-info__wind > p {
   font-size: 20px;
@@ -197,13 +185,14 @@ i:hover {
   align-items: center;
 }
 .main__weather-box__today-info__hourlyWeather__legend {
+  color: rgb(22, 37, 54);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   width: 8%;
   height: 80%;
-  background-color: rgb(95, 95, 95);
+  background-color: rgba(57, 58, 73, 0.414);
   border-radius: 5px;
 }
 .main__weather-box__today-info__hourlyWeather__legend > hr {
@@ -218,12 +207,12 @@ i:hover {
   align-items: center;
   width: 17%;
   height: 80%;
-  background-color: rgb(95, 95, 95);
+  background-color: rgba(57, 58, 73, 0.414);
   border-radius: 5px;
 }
 .main__weather-box__today-info__hourlyWeather__hourbox > p {
   font-size: 16px;
-  color: rgb(135, 175, 220);
+  color: rgb(22, 37, 54);
 }
 .main__weather-box__today-info__hourlyWeather__hourbox > hr {
   width: 100%;
@@ -246,12 +235,12 @@ i:hover {
   align-items: center;
   width: 15%;
   height: 80%;
-  background-color: rgb(95, 95, 95);
+  background-color: rgba(57, 58, 73, 0.414);
   border-radius: 5px;
 }
 .main__weather-box__nextdays-info__dayinfo > p {
   font-size: 16px;
-  color: rgb(135, 175, 220);
+  color: rgb(22, 37, 54);
 }
 .main__weather-box__nextdays-info__dayinfo > hr {
   width: 100%;

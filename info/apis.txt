@@ -1,0 +1,10 @@
+weatherapi key
+7208f54d803847c09c1155442231811
+
+wyszukiwarka miast i geolokacji
+http://api.openweathermap.org/geo/1.0/direct?q=Poznan&limit=3&appid=15ed1e78aa5825e31f026e478406cd75
+
+pogoda na 5 dni
+https://api.weatherapi.com/v1/forecast.json?key=7208f54d803847c09c1155442231811&q=warszawa&days=5&aqi=no&alerts=no
+
+getDay()
