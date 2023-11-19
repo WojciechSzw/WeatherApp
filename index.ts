@@ -5,15 +5,10 @@ export const Endpoints = {
   refreshToken: "http://localhost:3000/token",
   weatherLinks: "http://localhost:3000/weather",
 } as const;
-
-export const tokensData: { accessToken: string; refreshToken: string } = {
+let tokensData: { accessToken: string; refreshToken: string } = {
   accessToken: "1",
   refreshToken: "2",
 };
-
-document
-  .querySelector<HTMLElement>(".login-box__login-form__submit")
-  ?.addEventListener("click", login);
 
 const tabsLoginBox = {
   loginBoxColor: "rgb(59, 59, 59)",
@@ -82,9 +77,11 @@ const tabsLoginBox = {
   },
 };
 
-const loginButton = document.querySelector(".login-box__login-form__submit");
+document
+  .querySelector<HTMLElement>(".login-box__login-form__submit")
+  ?.addEventListener("click", login);
 
-function login() {
+async function login() {
   const username = document.querySelector<HTMLInputElement>(
     ".login-box__login-form__username"
   );
@@ -97,7 +94,7 @@ function login() {
     password: password.value,
   };
 
-  fetch(Endpoints.login, {
+  await fetch(Endpoints.login, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -112,12 +109,13 @@ function login() {
       return response.json() as Promise<{ accessToken: string }>;
     })
     .then((data) => {
-      tokensData.accessToken = (data as any).accessToken;
+      tokensData = data as any;
+      localStorage.setItem("Ltoken", (data as any).accessToken);
+      localStorage.setItem("RToken", (data as any).refreshToken);
       goToWeatherhtml();
     });
 }
 
 function goToWeatherhtml() {
   window.location.href = "weather.html";
-  console.log(tokensData);
 }

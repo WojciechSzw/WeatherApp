@@ -1,3 +1,12 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var _a;
 export const Endpoints = {
     login: "http://localhost:3000/login",
@@ -6,12 +15,10 @@ export const Endpoints = {
     refreshToken: "http://localhost:3000/token",
     weatherLinks: "http://localhost:3000/weather",
 };
-export const tokensData = {
+let tokensData = {
     accessToken: "1",
     refreshToken: "2",
 };
-(_a = document
-    .querySelector(".login-box__login-form__submit")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", login);
 const tabsLoginBox = {
     loginBoxColor: "rgb(59, 59, 59)",
     loginBoxNotchosenColor: "rgb(121, 120, 120)",
@@ -60,36 +67,40 @@ const tabsLoginBox = {
         this.registerBox.style.zIndex = "0";
     },
 };
-const loginButton = document.querySelector(".login-box__login-form__submit");
+(_a = document
+    .querySelector(".login-box__login-form__submit")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", login);
 function login() {
-    const username = document.querySelector(".login-box__login-form__username");
-    const password = document.querySelector(".login-box__login-form__password");
-    if (username === null || password === null)
-        return;
-    const loginInfo = {
-        username: username.value,
-        password: password.value,
-    };
-    fetch(Endpoints.login, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(loginInfo),
-    })
-        .then((response) => {
-        // Handle the response
-        if (!response.ok) {
-            throw new Error(`Network response was not ok: ${response.statusText}`);
-        }
-        return response.json();
-    })
-        .then((data) => {
-        tokensData.accessToken = data.accessToken;
-        goToWeatherhtml();
+    return __awaiter(this, void 0, void 0, function* () {
+        const username = document.querySelector(".login-box__login-form__username");
+        const password = document.querySelector(".login-box__login-form__password");
+        if (username === null || password === null)
+            return;
+        const loginInfo = {
+            username: username.value,
+            password: password.value,
+        };
+        yield fetch(Endpoints.login, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(loginInfo),
+        })
+            .then((response) => {
+            // Handle the response
+            if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.json();
+        })
+            .then((data) => {
+            tokensData = data;
+            localStorage.setItem("Ltoken", data.accessToken);
+            localStorage.setItem("RToken", data.refreshToken);
+            goToWeatherhtml();
+        });
     });
 }
 function goToWeatherhtml() {
     window.location.href = "weather.html";
-    console.log(tokensData);
 }

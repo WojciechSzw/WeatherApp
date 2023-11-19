@@ -3,6 +3,9 @@ $login-box-notchosen-color: rgb(121, 120, 120);
 $font-weather-color: rgb(22, 37, 54);
 $background-tiles-color: rgba(57, 58, 73, 0.414);
 
+$averageScreenSize: 1400px;
+$smallScreenSize: 940px;
+
 * {
   padding: 0;
   margin: 0;
@@ -117,9 +120,9 @@ body {
     background-image: url(images/backgrounds/cloud-blue-sky.jpg);
     &__today-info {
       display: grid;
-      width: 100%;
+      width: calc(100% - 4px);
       height: 320px;
-      background-color: rgba(128, 128, 128, 0.51);
+      border: 2px solid $font-weather-color;
       border-radius: 10px;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
       grid-template-rows: 1fr 0.4fr 2px 0.8fr 1fr 2px 1.8fr;
@@ -293,5 +296,23 @@ body {
         }
       }
     }
+  }
+}
+
+@media (max-width: $averageScreenSize) {
+  .main {
+    width: 667px;
+  }
+  .menu {
+    left: 20px;
+  }
+}
+
+@media (max-width: $smallScreenSize) {
+  .main {
+    width: 334px;
+  }
+  .menu {
+    left: 20px;
   }
 }

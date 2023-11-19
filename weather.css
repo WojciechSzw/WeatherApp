@@ -104,9 +104,9 @@ body {
 }
 .main__weather-box__today-info {
   display: grid;
-  width: 100%;
+  width: calc(100% - 4px);
   height: 320px;
-  background-color: rgba(128, 128, 128, 0.51);
+  border: 2px solid rgb(22, 37, 54);
   border-radius: 10px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 0.4fr 2px 0.8fr 1fr 2px 1.8fr;
@@ -246,4 +246,21 @@ body {
   width: 100%;
   height: 1px;
   background: linear-gradient(to right, transparent, antiquewhite, transparent);
+}
+
+@media (max-width: 1400px) {
+  .main {
+    width: 667px;
+  }
+  .menu {
+    left: 20px;
+  }
+}
+@media (max-width: 940px) {
+  .main {
+    width: 334px;
+  }
+  .menu {
+    left: 20px;
+  }
 }/*# sourceMappingURL=weather.css.map */
