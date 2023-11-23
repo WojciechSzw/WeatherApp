@@ -35,6 +35,33 @@ body {
   flex-direction: column;
   align-items: center;
 }
+.menu__short__upper__img {
+  background-image: url(images/users/NoFoto.jpg);
+  background-size: contain;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+.menu__short__upper__img__hovertext {
+  visibility: hidden;
+  width: 100px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  border: solid white 1px;
+  top: 80px;
+  left: -1px;
+  z-index: 1;
+}
+.menu__short__upper__img:hover {
+  background-image: url(images/users/logout.jpg);
+}
+.menu__short__upper__img:hover .menu__short__upper__img__hovertext {
+  visibility: visible;
+}
 .menu__short__upper > img {
   border-radius: 50%;
 }

@@ -1,5 +1,15 @@
 import { Endpoints } from "./index.js";
 
+document.addEventListener("click", (event) => {
+  if (
+    (event.target as HTMLElement).classList.contains("menu__short__upper__img")
+  ) {
+    document.querySelector<HTMLElement>("body")!.innerHTML = "";
+    localStorage.clear();
+    window.location.href = "index.html";
+  }
+});
+
 fetch(Endpoints.weatherLinks, {
   method: "GET",
   headers: { authorization: localStorage.getItem("Ltoken") as string },
