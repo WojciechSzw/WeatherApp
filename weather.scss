@@ -92,6 +92,10 @@ body {
       gap: 10px;
       & > i {
         color: antiquewhite;
+        &:hover {
+          scale: 1.1;
+          cursor: pointer;
+        }
       }
     }
     &__lower {

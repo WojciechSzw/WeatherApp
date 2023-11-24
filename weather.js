@@ -7,11 +7,12 @@ document.addEventListener("click", (event) => {
     }
 });
 fetch(Endpoints.weatherLinks, {
-    method: "GET",
+    method: "POST",
     headers: { authorization: localStorage.getItem("Ltoken") },
 })
     .then((response) => {
     if (!response.ok) {
+        window.location.href = "index.html";
         throw new Error(`Network response was not ok: ${response.statusText}`);
     }
     return response.json();
@@ -37,7 +38,6 @@ function fetchAllWeatherLinks(data) {
 }
 function generateWeatherTiles(data) {
     var _a;
-    console.log(data);
     var newWeatherBox = document.createElement("div");
     newWeatherBox.className = "main__weather-box";
     // Create the inner structure of the new main__weather-box
@@ -70,12 +70,7 @@ function generateWeatherTiles(data) {
         </div>
         <div class="main__weather-box__nextdays-info">
         ${dailyForecastTiles()}
-          <div class="main__weather-box__nextdays-info__dayinfo">
-            <p>sat</p>
-            <hr />
-            <p>10°</p>
-            <p>10%</p>
-          </div>
+          
         </div>
 `;
     function hourlyForecastTiles() {
@@ -92,7 +87,7 @@ function generateWeatherTiles(data) {
     }
     function dailyForecastTiles() {
         let returnedString = "";
-        for (let x = 1; x < 4; x += 1) {
+        for (let x = 1; x < 5; x += 1) {
             returnedString += `<div class="main__weather-box__nextdays-info__dayinfo">
       <p>${day(x)}</p>
       <hr />

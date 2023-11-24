@@ -146,11 +146,23 @@ body {
 .login-box__login-form__submit:active, .login-box__register-form__submit:active {
   font-size: 18px;
 }
+.login-box__login-form__passwordsNotMatch, .login-box__register-form__passwordsNotMatch {
+  color: red;
+  font-size: 15px;
+  font-weight: 100;
+  display: none;
+}
+.login-box__login-form__accountCreated, .login-box__register-form__accountCreated {
+  color: rgb(34, 255, 0);
+  font-size: 15px;
+  font-weight: 100;
+  display: none;
+}
 .login-box__login-form__wrongUsernamePassword, .login-box__register-form__wrongUsernamePassword {
   color: red;
   font-size: 15px;
   font-weight: 100;
-  visibility: hidden;
+  display: none;
 }
 
 .footer {

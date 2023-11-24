@@ -5,10 +5,39 @@ export const Endpoints = {
   refreshToken: "http://localhost:3000/token",
   weatherLinks: "http://localhost:3000/weather",
 } as const;
-let tokensData: { accessToken: string; refreshToken: string } = {
-  accessToken: "1",
-  refreshToken: "2",
-};
+
+let tokensData: { accessToken: string; refreshToken: string };
+
+document.addEventListener("click", (event) => {
+  if (
+    (event?.target as HTMLElement).classList.contains(
+      "login-box__choose-tab__register"
+    )
+  ) {
+    tabsLoginBox.clickedRegister();
+  }
+  if (
+    (event?.target as HTMLElement).classList.contains(
+      "login-box__choose-tab__login"
+    )
+  ) {
+    tabsLoginBox.clickedLogin();
+  }
+  if (
+    (event?.target as HTMLElement).classList.contains(
+      "login-box__login-form__submit"
+    )
+  ) {
+    login();
+  }
+  if (
+    (event?.target as HTMLElement).classList.contains(
+      "login-box__register-form__submit"
+    )
+  ) {
+    register();
+  }
+});
 
 const tabsLoginBox = {
   loginBoxColor: "rgb(59, 59, 59)",
@@ -23,6 +52,9 @@ const tabsLoginBox = {
   loginForm: document.querySelector<HTMLElement>(".login-box__login-form"),
   registerForm: document.querySelector<HTMLElement>(
     ".login-box__register-form"
+  ),
+  wrongPassword: document.querySelector<HTMLElement>(
+    ".login-box__login-form__wrongUsernamePassword"
   ),
 
   clickedLogin: function () {
@@ -57,12 +89,13 @@ const tabsLoginBox = {
       this.registerBox === null ||
       this.loginBox === null ||
       this.loginForm === null ||
-      this.registerForm === null
+      this.registerForm === null ||
+      this.wrongPassword === null
     )
       return "err";
+    this.wrongPassword.style.visibility = "hidden";
     this.loginForm.style.visibility = "hidden";
     this.registerForm.style.visibility = "visible";
-
     this.loginBox.style.zIndex = "1";
     this.loginBox.style.cursor = "pointer";
     this.loginBox.style.backgroundColor = this.loginBoxNotchosenColor;
@@ -76,10 +109,6 @@ const tabsLoginBox = {
     this.registerBox.style.zIndex = "0";
   },
 };
-
-document
-  .querySelector<HTMLElement>(".login-box__login-form__submit")
-  ?.addEventListener("click", login);
 
 async function login() {
   const username = document.querySelector<HTMLInputElement>(
@@ -102,8 +131,10 @@ async function login() {
     body: JSON.stringify(loginInfo),
   })
     .then((response) => {
-      // Handle the response
       if (!response.ok) {
+        document.querySelector<HTMLElement>(
+          ".login-box__login-form__wrongUsernamePassword"
+        )!.style.visibility = "visible";
         throw new Error(`Network response was not ok: ${response.statusText}`);
       }
       return response.json() as Promise<{ accessToken: string }>;
@@ -112,10 +143,70 @@ async function login() {
       tokensData = data as any;
       localStorage.setItem("Ltoken", (data as any).accessToken);
       localStorage.setItem("RToken", (data as any).refreshToken);
-      goToWeatherhtml();
+      window.location.href = "weather.html";
     });
 }
 
-function goToWeatherhtml() {
-  window.location.href = "weather.html";
+async function register() {
+  const passwordsNotMatch = document.querySelector<HTMLElement>(
+    ".login-box__register-form__passwordsNotMatch"
+  );
+  const accountCreated = document.querySelector<HTMLElement>(
+    ".login-box__register-form__accountCreated"
+  );
+  const usernameInUse = document.querySelector<HTMLElement>(
+    ".login-box__register-form__wrongUsernamePassword"
+  );
+  const username = document.querySelector<HTMLInputElement>(
+    ".login-box__register-form__username"
+  );
+  const password = document.querySelector<HTMLInputElement>(
+    ".login-box__register-form__password"
+  );
+  const password2 = document.querySelector<HTMLInputElement>(
+    ".login-box__register-form__password2"
+  );
+
+  if (
+    username === null ||
+    password === null ||
+    password2 === null ||
+    usernameInUse === null ||
+    accountCreated === null ||
+    passwordsNotMatch === null
+  )
+    return;
+  if (password.value !== password2.value) {
+    console.log("passwords dont match each other");
+    passwordsNotMatch.style.display = "block";
+    return;
+  }
+
+  const registerInfo = {
+    username: username.value,
+    password: password.value,
+  };
+  await fetch(Endpoints.register, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(registerInfo),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        passwordsNotMatch.style.display = "none";
+        usernameInUse.style.display = "block";
+        throw new Error(`Network response was not ok: ${response.statusText}`);
+      }
+      return response.json() as any;
+    })
+    .then((data) => {
+      username.value = "";
+      password.value = "";
+      password2.value = "";
+      passwordsNotMatch.style.display = "none";
+      usernameInUse.style.display = "none";
+      accountCreated.style.display = "block";
+    });
 }

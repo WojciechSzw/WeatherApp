@@ -156,11 +156,23 @@ body {
         font-size: 18px;
       }
     }
+    &__passwordsNotMatch {
+      color: red;
+      font-size: 15px;
+      font-weight: 100;
+      display: none;
+    }
+    &__accountCreated {
+      color: rgb(34, 255, 0);
+      font-size: 15px;
+      font-weight: 100;
+      display: none;
+    }
     &__wrongUsernamePassword {
       color: red;
       font-size: 15px;
       font-weight: 100;
-      visibility: hidden;
+      display: none;
     }
   }
 }

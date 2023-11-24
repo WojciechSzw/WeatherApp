@@ -17,48 +17,10 @@
   <body>
     <div class="login-box">
       <div class="login-box__choose-tab">
-        <div
-          class="login-box__choose-tab__login"
-          onclick="tabsLoginBox.clickedLogin()"
-        >
-          <a>log in</a>
-        </div>
+        <div class="login-box__choose-tab__login">log in</div>
         <div class="login-box__choose-tab__gap"></div>
-        <div
-          class="login-box__choose-tab__register"
-          onclick="tabsLoginBox.clickedRegister()"
-        >
-          <a>register</a>
-        </div>
+        <div class="login-box__choose-tab__register">register</div>
       </div>
-      <form class="login-box__register-form">
-        <input
-          class="login-box__register-form__username"
-          type="text"
-          id="username"
-          name="username"
-          placeholder="Username"
-        />
-        <input
-          class="login-box__register-form__password"
-          type="text"
-          id="password"
-          name="password"
-          placeholder="Password"
-        />
-        <input
-          class="login-box__register-form__password2"
-          type="text"
-          id="password2"
-          name="password2"
-          placeholder="Confirm password"
-        />
-        <input
-          class="login-box__register-form__submit"
-          type="submit"
-          value="Register"
-        />
-      </form>
       <form class="login-box__login-form">
         <input
           class="login-box__login-form__username"
@@ -81,6 +43,42 @@
           class="login-box__login-form__submit"
           type="submit"
           value="Log in"
+          onclick="event.preventDefault()"
+        />
+      </form>
+      <form class="login-box__register-form">
+        <p class="login-box__register-form__accountCreated">Account created!</p>
+        <p class="login-box__register-form__wrongUsernamePassword">
+          Username in use
+        </p>
+        <input
+          class="login-box__register-form__username"
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Username"
+        />
+        <input
+          class="login-box__register-form__password"
+          type="text"
+          id="password"
+          name="password"
+          placeholder="Password"
+        />
+        <input
+          class="login-box__register-form__password2"
+          type="text"
+          id="password2"
+          name="password2"
+          placeholder="Confirm password"
+        />
+        <p class="login-box__register-form__passwordsNotMatch">
+          Passwords do NOT match!
+        </p>
+        <input
+          class="login-box__register-form__submit"
+          type="submit"
+          value="Register"
           onclick="event.preventDefault()"
         />
       </form>

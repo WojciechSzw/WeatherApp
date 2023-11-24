@@ -83,6 +83,10 @@ body {
 .menu__short__middle > i {
   color: antiquewhite;
 }
+.menu__short__middle > i:hover {
+  scale: 1.1;
+  cursor: pointer;
+}
 .menu__short__lower {
   width: 100px;
   height: 130px;

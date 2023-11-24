@@ -7,7 +7,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var _a;
 export const Endpoints = {
     login: "http://localhost:3000/login",
     register: "http://localhost:3000/register",
@@ -15,10 +14,21 @@ export const Endpoints = {
     refreshToken: "http://localhost:3000/token",
     weatherLinks: "http://localhost:3000/weather",
 };
-let tokensData = {
-    accessToken: "1",
-    refreshToken: "2",
-};
+let tokensData;
+document.addEventListener("click", (event) => {
+    if ((event === null || event === void 0 ? void 0 : event.target).classList.contains("login-box__choose-tab__register")) {
+        tabsLoginBox.clickedRegister();
+    }
+    if ((event === null || event === void 0 ? void 0 : event.target).classList.contains("login-box__choose-tab__login")) {
+        tabsLoginBox.clickedLogin();
+    }
+    if ((event === null || event === void 0 ? void 0 : event.target).classList.contains("login-box__login-form__submit")) {
+        login();
+    }
+    if ((event === null || event === void 0 ? void 0 : event.target).classList.contains("login-box__register-form__submit")) {
+        register();
+    }
+});
 const tabsLoginBox = {
     loginBoxColor: "rgb(59, 59, 59)",
     loginBoxNotchosenColor: "rgb(121, 120, 120)",
@@ -26,6 +36,7 @@ const tabsLoginBox = {
     registerBox: document.querySelector(".login-box__choose-tab__register"),
     loginForm: document.querySelector(".login-box__login-form"),
     registerForm: document.querySelector(".login-box__register-form"),
+    wrongPassword: document.querySelector(".login-box__login-form__wrongUsernamePassword"),
     clickedLogin: function () {
         if (this.registerBox === null ||
             this.loginBox === null ||
@@ -51,8 +62,10 @@ const tabsLoginBox = {
         if (this.registerBox === null ||
             this.loginBox === null ||
             this.loginForm === null ||
-            this.registerForm === null)
+            this.registerForm === null ||
+            this.wrongPassword === null)
             return "err";
+        this.wrongPassword.style.visibility = "hidden";
         this.loginForm.style.visibility = "hidden";
         this.registerForm.style.visibility = "visible";
         this.loginBox.style.zIndex = "1";
@@ -67,8 +80,6 @@ const tabsLoginBox = {
         this.registerBox.style.zIndex = "0";
     },
 };
-(_a = document
-    .querySelector(".login-box__login-form__submit")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", login);
 function login() {
     return __awaiter(this, void 0, void 0, function* () {
         const username = document.querySelector(".login-box__login-form__username");
@@ -87,8 +98,8 @@ function login() {
             body: JSON.stringify(loginInfo),
         })
             .then((response) => {
-            // Handle the response
             if (!response.ok) {
+                document.querySelector(".login-box__login-form__wrongUsernamePassword").style.visibility = "visible";
                 throw new Error(`Network response was not ok: ${response.statusText}`);
             }
             return response.json();
@@ -97,10 +108,56 @@ function login() {
             tokensData = data;
             localStorage.setItem("Ltoken", data.accessToken);
             localStorage.setItem("RToken", data.refreshToken);
-            goToWeatherhtml();
+            window.location.href = "weather.html";
         });
     });
 }
-function goToWeatherhtml() {
-    window.location.href = "weather.html";
+function register() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const passwordsNotMatch = document.querySelector(".login-box__register-form__passwordsNotMatch");
+        const accountCreated = document.querySelector(".login-box__register-form__accountCreated");
+        const usernameInUse = document.querySelector(".login-box__register-form__wrongUsernamePassword");
+        const username = document.querySelector(".login-box__register-form__username");
+        const password = document.querySelector(".login-box__register-form__password");
+        const password2 = document.querySelector(".login-box__register-form__password2");
+        if (username === null ||
+            password === null ||
+            password2 === null ||
+            usernameInUse === null ||
+            accountCreated === null ||
+            passwordsNotMatch === null)
+            return;
+        if (password.value !== password2.value) {
+            console.log("passwords dont match each other");
+            passwordsNotMatch.style.display = "block";
+            return;
+        }
+        const registerInfo = {
+            username: username.value,
+            password: password.value,
+        };
+        yield fetch(Endpoints.register, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(registerInfo),
+        })
+            .then((response) => {
+            if (!response.ok) {
+                passwordsNotMatch.style.display = "none";
+                usernameInUse.style.display = "block";
+                throw new Error(`Network response was not ok: ${response.statusText}`);
+            }
+            return response.json();
+        })
+            .then((data) => {
+            username.value = "";
+            password.value = "";
+            password2.value = "";
+            passwordsNotMatch.style.display = "none";
+            usernameInUse.style.display = "none";
+            accountCreated.style.display = "block";
+        });
+    });
 }
