@@ -135,7 +135,7 @@ body {
 }
 .main__weather-box__today-info {
   display: grid;
-  width: calc(100% - 4px);
+  width: calc(100% - 2px);
   height: 320px;
   border: 2px solid rgb(22, 37, 54);
   border-radius: 10px;
@@ -277,6 +277,72 @@ body {
   width: 100%;
   height: 1px;
   background: linear-gradient(to right, transparent, antiquewhite, transparent);
+}
+
+.add-city {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  width: 300px;
+  height: 400px;
+  background-color: red;
+}
+.add-city__cityname {
+  width: 100%;
+  background-color: gray;
+  margin: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.add-city__cityname label {
+  color: white;
+  font-size: 22px;
+}
+.add-city__cityname input {
+  color: antiquewhite;
+  height: 40px;
+  background-color: rgb(59, 59, 59);
+  width: 80%;
+  font-size: 18px;
+  padding: 0 10px 0 10px;
+  border-radius: 20px;
+  border: 2px solid rgb(121, 120, 120);
+}
+.add-city__cityname__submit {
+  font-size: 22px;
+  padding: 5px;
+  width: 80%;
+  height: 40px;
+  border-radius: 20px;
+}
+.add-city__result {
+  gap: 10px;
+  background-color: gray;
+  margin: 20px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.add-city__result label {
+  color: white;
+  font-size: 22px;
+}
+.add-city__result output {
+  color: rgb(22, 37, 54);
+}
+.add-city__result__submit {
+  font-size: 22px;
+  padding: 5px;
+  width: 80%;
+  height: 40px;
+  border-radius: 20px;
 }
 
 @media (max-width: 1400px) {

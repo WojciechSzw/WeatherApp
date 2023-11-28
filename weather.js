@@ -5,6 +5,9 @@ document.addEventListener("click", (event) => {
         localStorage.clear();
         window.location.href = "index.html";
     }
+    else if (event.target.classList.contains("fa-plus")) {
+        console.log("now open adding weathercity");
+    }
 });
 fetch(Endpoints.weatherLinks, {
     method: "POST",

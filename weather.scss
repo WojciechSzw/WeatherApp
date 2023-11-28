@@ -151,7 +151,7 @@ body {
     background-image: url(images/backgrounds/cloud-blue-sky.jpg);
     &__today-info {
       display: grid;
-      width: calc(100% - 4px);
+      width: calc(100% - 2px);
       height: 320px;
       border: 2px solid $font-weather-color;
       border-radius: 10px;
@@ -326,6 +326,74 @@ body {
           );
         }
       }
+    }
+  }
+}
+
+.add-city {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  width: 300px;
+  height: 400px;
+  background-color: red;
+  &__cityname {
+    width: 100%;
+
+    background-color: gray;
+    margin: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    & label {
+      color: white;
+      font-size: 22px;
+    }
+    & input {
+      color: antiquewhite;
+      height: 40px;
+      background-color: $login-box-color;
+      width: 80%;
+      font-size: 18px;
+      padding: 0 10px 0 10px;
+      border-radius: 20px;
+      border: 2px solid rgb(121, 120, 120);
+    }
+    &__submit {
+      font-size: 22px;
+      padding: 5px;
+      width: 80%;
+      height: 40px;
+      border-radius: 20px;
+    }
+  }
+  &__result {
+    gap: 10px;
+    background-color: gray;
+    margin: 20px 0;
+    width: 100%;
+    // height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    & label {
+      color: white;
+      font-size: 22px;
+    }
+    & output {
+      color: $font-weather-color;
+    }
+    &__submit {
+      font-size: 22px;
+      padding: 5px;
+      width: 80%;
+      height: 40px;
+      border-radius: 20px;
     }
   }
 }

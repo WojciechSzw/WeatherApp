@@ -7,6 +7,8 @@ document.addEventListener("click", (event) => {
     document.querySelector<HTMLElement>("body")!.innerHTML = "";
     localStorage.clear();
     window.location.href = "index.html";
+  } else if ((event.target as HTMLElement).classList.contains("fa-plus")) {
+    console.log("now open adding weathercity");
   }
 });
 

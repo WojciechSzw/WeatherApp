@@ -22,12 +22,6 @@
           <div class="menu__short__upper__img">
             <span class="menu__short__upper__img__hovertext">log out</span>
           </div>
-          <!-- <img
-            src="images/users/NoFoto.jpg"
-            alt="userfoto"
-            width="60px"
-            height="60px"
-          /> -->
           <hr />
         </div>
         <div class="menu__short__middle">
@@ -42,5 +36,38 @@
       <div class="menu__expandable"></div>
     </aside>
     <div class="main"></div>
+    <div class="add-city">
+      <form class="add-city__cityname">
+        <label for="add-city">Search for new city to follow!</label>
+        <input
+          class="add-city__cityname__input"
+          type="text"
+          name="add-city"
+          placeholder="City name"
+        />
+        <input
+          class="add-city__cityname__submit"
+          type="submit"
+          value="Serch"
+          onclick="event.preventDefault()"
+        />
+      </form>
+      <form class="add-city__result">
+        <label class="add-city__result__name-label">City name:</label>
+        <output class="add-city__result__name-output">warszawa</output>
+        <label class="add-city__result__country-label">Country:</label>
+        <output class="add-city__result__country-output">poland</output>
+        <label class="add-city__result__localtime-label">Local time:</label>
+        <output class="add-city__result__localtime-output"
+          >2021:11:11 11:11</output
+        >
+        <input
+          type="submit"
+          class="add-city__result__submit"
+          onclick="event.preventDefault()"
+          value="Add City!"
+        />
+      </form>
+    </div>
   </body>
 </html>
