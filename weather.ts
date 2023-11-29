@@ -1,14 +1,20 @@
 import { Endpoints } from "./index.js";
 
 document.addEventListener("click", (event) => {
-  if (
-    (event.target as HTMLElement).classList.contains("menu__short__upper__img")
-  ) {
+  const target = event.target as HTMLElement;
+  if (target.classList.contains("menu__short__upper__img")) {
     document.querySelector<HTMLElement>("body")!.innerHTML = "";
     localStorage.clear();
     window.location.href = "index.html";
-  } else if ((event.target as HTMLElement).classList.contains("fa-plus")) {
-    console.log("now open adding weathercity");
+  } else if (target.classList.contains("fa-plus")) {
+    const addWeatherWindow = document.querySelector<HTMLElement>(
+      ".add-city-blackground"
+    );
+    addWeatherWindow!.style.display = "block";
+  } else if (target.classList.contains("add-city-blackground")) {
+    target.style.display = "none";
+  } else if (target.classList.contains("add-city__cityname__submit")) {
+    findCity();
   }
 });
 
@@ -99,6 +105,7 @@ function generateWeatherTiles(data: any) {
     }
     return returnedString;
   }
+
   function dailyForecastTiles() {
     let returnedString = "";
     for (let x = 1; x < 5; x += 1) {
@@ -218,4 +225,29 @@ function getDayTime(data: any) {
   }
   returnedString += " " + date.substring(11);
   return returnedString;
+}
+
+function findCity() {
+  const inputCityName = document.querySelector<HTMLInputElement>(
+    ".add-city__cityname__input"
+  );
+  if (inputCityName!.value) {
+    const cityName = inputCityName!.value;
+    console.log(cityName);
+
+    fetch(Endpoints.weatherapi.replace("city", cityName), {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            "apiLink response was not ok: " + response.statusText
+          );
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
+  }
 }

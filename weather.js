@@ -1,12 +1,20 @@
 import { Endpoints } from "./index.js";
 document.addEventListener("click", (event) => {
-    if (event.target.classList.contains("menu__short__upper__img")) {
+    const target = event.target;
+    if (target.classList.contains("menu__short__upper__img")) {
         document.querySelector("body").innerHTML = "";
         localStorage.clear();
         window.location.href = "index.html";
     }
-    else if (event.target.classList.contains("fa-plus")) {
-        console.log("now open adding weathercity");
+    else if (target.classList.contains("fa-plus")) {
+        const addWeatherWindow = document.querySelector(".add-city-blackground");
+        addWeatherWindow.style.display = "block";
+    }
+    else if (target.classList.contains("add-city-blackground")) {
+        target.style.display = "none";
+    }
+    else if (target.classList.contains("add-city__cityname__submit")) {
+        findCity();
     }
 });
 fetch(Endpoints.weatherLinks, {
@@ -205,4 +213,23 @@ function getDayTime(data) {
     }
     returnedString += " " + date.substring(11);
     return returnedString;
+}
+function findCity() {
+    const inputCityName = document.querySelector(".add-city__cityname__input");
+    if (inputCityName.value) {
+        const cityName = inputCityName.value;
+        console.log(cityName);
+        fetch(Endpoints.weatherapi.replace("city", cityName), {
+            method: "GET",
+        })
+            .then((response) => {
+            if (!response.ok) {
+                throw new Error("apiLink response was not ok: " + response.statusText);
+            }
+            return response.json();
+        })
+            .then((data) => {
+            console.log(data);
+        });
+    }
 }

@@ -103,10 +103,8 @@ body {
       border-radius: 20px;
       border: 2px solid $login-box-notchosen-color;
       background-color: $login-box-color;
-      // text-transform: uppercase;
       &:focus {
         outline: 2px solid $login-box-notchosen-color;
-        // border: 4px solid $login-box-notchosen-color;
       }
     }
     &__password {
