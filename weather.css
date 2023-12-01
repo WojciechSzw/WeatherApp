@@ -373,7 +373,7 @@ body {
   width: 80%;
   font-size: 18px;
 }
-.add-city__result__submit {
+.add-city__result__submit-off {
   color: rgb(59, 59, 59);
   margin-top: 10px;
   height: 40px;
@@ -384,10 +384,24 @@ body {
   background-color: rgba(121, 120, 120, 0.514);
   text-transform: uppercase;
 }
-.add-city__result__submit:active {
+.add-city__result__submit-off:active {
   font-size: 18px;
 }
-.add-city__result__submit:focus {
+.add-city__result__submit-off:focus {
+  outline: none !important;
+}
+.add-city__result__submit-on {
+  cursor: pointer;
+  background-color: rgb(197, 197, 197);
+}
+.add-city__result__submit-on:hover {
+  font-size: 20px;
+  scale: 0.95;
+}
+.add-city__result__submit-on:active {
+  font-size: 18px;
+}
+.add-city__result__submit-on:focus {
   outline: none !important;
 }
 

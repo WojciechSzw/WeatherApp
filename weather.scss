@@ -423,7 +423,7 @@ body {
       width: 80%;
       font-size: 18px;
     }
-    &__submit {
+    &__submit-off {
       // cursor: pointer;
       // background-color: $login-box-notchosen-color;
       color: $login-box-color;
@@ -435,9 +435,20 @@ body {
       border-radius: 20px;
       background-color: rgba(121, 120, 120, 0.514);
       text-transform: uppercase;
+      &:active {
+        font-size: 18px;
+      }
+      &:focus {
+        outline: none !important;
+      }
+    }
+    &__submit-on {
+      cursor: pointer;
+      background-color: rgb(197, 197, 197);
+
       &:hover {
-        // font-size: 20px;
-        // scale: 0.95;
+        font-size: 20px;
+        scale: 0.95;
       }
       &:active {
         font-size: 18px;

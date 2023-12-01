@@ -16,9 +16,12 @@ document.addEventListener("click", (event) => {
     else if (target.classList.contains("add-city__cityname__submit")) {
         findCity();
     }
+    else if (target.classList.contains("add-city__result__submit-on")) {
+        addCity();
+    }
 });
 fetch(Endpoints.weatherLinks, {
-    method: "POST",
+    method: "GET",
     headers: { authorization: localStorage.getItem("Ltoken") },
 })
     .then((response) => {
@@ -215,7 +218,11 @@ function getDayTime(data) {
     return returnedString;
 }
 function findCity() {
+    const outCityName = document.querySelector(".add-city__result__name-output");
+    const outCountryName = document.querySelector(".add-city__result__country-output");
+    const outLocalTime = document.querySelector(".add-city__result__localtime-output");
     const inputCityName = document.querySelector(".add-city__cityname__input");
+    const addBtn = document.querySelector(".add-city__result__submit-off");
     if (inputCityName.value) {
         const cityName = inputCityName.value;
         console.log(cityName);
@@ -223,13 +230,44 @@ function findCity() {
             method: "GET",
         })
             .then((response) => {
+            outCityName.textContent = "";
+            outCountryName.textContent = "";
+            outLocalTime.textContent = "";
+            addBtn.classList.remove("add-city__result__submit-on");
             if (!response.ok) {
                 throw new Error("apiLink response was not ok: " + response.statusText);
             }
             return response.json();
         })
             .then((data) => {
-            console.log(data);
+            // console.log(data);
+            outCityName.textContent = data.location.name;
+            outCountryName.textContent = data.location.country;
+            outLocalTime.textContent = data.location.localtime;
+            addBtn === null || addBtn === void 0 ? void 0 : addBtn.classList.add("add-city__result__submit-on");
         });
     }
+}
+function addCity() {
+    const outCityName = document.querySelector(".add-city__result__name-output").textContent;
+    fetch(Endpoints.weatherLinks, {
+        method: "POST",
+        headers: {
+            authorization: localStorage.getItem("Ltoken"),
+            "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+            apiLink: Endpoints.weatherapi.replace("city", outCityName),
+            cityName: outCityName,
+        }),
+    })
+        .then((response) => {
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.json();
+    })
+        .then((data) => {
+        location.reload();
+    });
 }
