@@ -111,7 +111,6 @@ body {
 
 .main {
   width: 1000px;
-  padding-top: 2%;
   height: 100%;
   background-color: rgba(59, 59, 59, 0.47);
   position: fixed;
@@ -123,6 +122,8 @@ body {
   left: 50%;
   top: 0;
   transform: translate(-50%);
+  overflow: hidden;
+  overflow-y: scroll;
 }
 .main__weather-box {
   margin: 16.6px;
@@ -131,7 +132,6 @@ body {
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  background-image: url(images/backgrounds/cloud-blue-sky.jpg);
 }
 .main__weather-box__today-info {
   display: grid;
@@ -154,6 +154,7 @@ body {
 }
 .main__weather-box__today-info__date {
   top: 0;
+  font-size: 16px;
   grid-area: date;
   width: 100%;
   text-align: center;
@@ -236,7 +237,7 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 17%;
+  width: 9%;
   height: 80%;
   background-color: rgba(57, 58, 73, 0.414);
   border-radius: 5px;
@@ -258,6 +259,22 @@ body {
   justify-content: center;
   gap: 2px;
   align-items: center;
+}
+.main__weather-box__nextdays-info__legend {
+  color: rgb(22, 37, 54);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 8%;
+  height: 80%;
+  background-color: rgba(57, 58, 73, 0.414);
+  border-radius: 5px;
+}
+.main__weather-box__nextdays-info__legend > hr {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, antiquewhite, transparent);
 }
 .main__weather-box__nextdays-info__dayinfo {
   display: flex;
@@ -285,10 +302,11 @@ body {
   background-color: rgba(0, 0, 0, 0.685);
   height: 100%;
   width: 100%;
-  display: block;
+  display: none;
 }
 
 .add-city {
+  display: none;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -402,6 +420,63 @@ body {
   font-size: 18px;
 }
 .add-city__result__submit-on:focus {
+  outline: none !important;
+}
+
+.del-city {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  width: 300px;
+  height: 450px;
+  background-color: rgb(59, 59, 59);
+}
+.del-city__title {
+  padding-top: 15px;
+  color: antiquewhite;
+  font-size: 22px;
+  text-align: center;
+}
+.del-city__cities {
+  margin: 10px 0 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  overflow-y: scroll;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  height: 370px;
+  width: calc(100% - 4px);
+  border-radius: 20px;
+  border: solid rgb(121, 120, 120) 2px;
+}
+.del-city__cities__city {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(59, 59, 59) !important;
+  text-align: center;
+  min-height: 40px;
+  width: calc(80% + 20px) !important;
+  font-size: 18px;
+  padding: 0 10px 0 10px;
+  border-radius: 20px;
+  background-color: rgb(121, 120, 120);
+  text-transform: uppercase;
+}
+.del-city__cities__city:hover {
+  font-size: 20px;
+  scale: 0.95;
+}
+.del-city__cities__city:active {
+  font-size: 18px;
+}
+.del-city__cities__city:focus {
   outline: none !important;
 }
 

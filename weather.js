@@ -1,4 +1,5 @@
 import { Endpoints } from "./index.js";
+let cities = [];
 document.addEventListener("click", (event) => {
     const target = event.target;
     if (target.classList.contains("menu__short__upper__img")) {
@@ -7,11 +8,10 @@ document.addEventListener("click", (event) => {
         window.location.href = "index.html";
     }
     else if (target.classList.contains("fa-plus")) {
-        const addWeatherWindow = document.querySelector(".add-city-blackground");
-        addWeatherWindow.style.display = "block";
+        addCityWindow();
     }
     else if (target.classList.contains("add-city-blackground")) {
-        target.style.display = "none";
+        closeAddDelWindows();
     }
     else if (target.classList.contains("add-city__cityname__submit")) {
         findCity();
@@ -19,22 +19,33 @@ document.addEventListener("click", (event) => {
     else if (target.classList.contains("add-city__result__submit-on")) {
         addCity();
     }
-});
-fetch(Endpoints.weatherLinks, {
-    method: "GET",
-    headers: { authorization: localStorage.getItem("Ltoken") },
-})
-    .then((response) => {
-    if (!response.ok) {
-        window.location.href = "index.html";
-        throw new Error(`Network response was not ok: ${response.statusText}`);
+    else if (target.classList.contains("fa-minus")) {
+        delCityWindow();
+        addCitiesToDel();
     }
-    return response.json();
-})
-    .then((data) => {
-    fetchAllWeatherLinks(data);
+    else if (target.classList.contains("del-city__cities__city")) {
+        delCity(target);
+    }
 });
+fetchFollowedCities();
+function fetchFollowedCities() {
+    fetch(Endpoints.weatherLinks, {
+        method: "GET",
+        headers: { authorization: localStorage.getItem("Ltoken") },
+    })
+        .then((response) => {
+        if (!response.ok) {
+            window.location.replace("/");
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        return response.json();
+    })
+        .then((data) => {
+        fetchAllWeatherLinks(data);
+    });
+}
 function fetchAllWeatherLinks(data) {
+    cities = [];
     data.forEach((element) => {
         fetch(element.apiLink, {
             method: "GET",
@@ -47,6 +58,7 @@ function fetchAllWeatherLinks(data) {
         })
             .then((data) => {
             generateWeatherTiles(data);
+            cities.push([element.id, data.location.name]);
         });
     });
 }
@@ -83,29 +95,37 @@ function generateWeatherTiles(data) {
           </div>
         </div>
         <div class="main__weather-box__nextdays-info">
+        <div class="main__weather-box__nextdays-info__legend">
+        <i class="fa-solid fa-calendar-days"></i>
+        <hr />
+        <i class="fa-solid fa-temperature-quarter"></i>
+        <i class="fa-solid fa-umbrella"></i>
+      </div>
         ${dailyForecastTiles()}
           
         </div>
 `;
+    // console.log(data.condition.code);
+    newWeatherBox.style.backgroundImage = `url(images/weathericons/${data.current.condition.code}.jpg)`;
     function hourlyForecastTiles() {
         let returnedString = "";
-        for (let x = 6; x < 23; x += 4) {
+        for (let x = 6; x < 24; x = x + 2) {
             returnedString += `<div class="main__weather-box__today-info__hourlyWeather__hourbox">
-        <p>${data.forecast.forecastday[0].hour[x].chance_of_rain}%</p>
-        <p>${data.forecast.forecastday[0].hour[x].temp_c}°</p>
+        <p>${data.forecast.forecastday[0].hour[x].chance_of_rain}</p>
+        <p>${Math.round(data.forecast.forecastday[0].hour[x].temp_c)}</p>
         <hr />
-        <p>${x}:00</p>
+        <p>${x}</p>
       </div>`;
         }
         return returnedString;
     }
     function dailyForecastTiles() {
         let returnedString = "";
-        for (let x = 1; x < 5; x += 1) {
+        for (let x = 1; x < 3; x++) {
             returnedString += `<div class="main__weather-box__nextdays-info__dayinfo">
       <p>${day(x)}</p>
       <hr />
-      <p>${data.forecast.forecastday[x].day.avgtemp_c}°</p>
+      <p>${Math.round(data.forecast.forecastday[x].day.avgtemp_c)}°</p>
       <p>${data.forecast.forecastday[x].day.daily_chance_of_rain}%</p>
     </div>`;
         }
@@ -225,7 +245,6 @@ function findCity() {
     const addBtn = document.querySelector(".add-city__result__submit-off");
     if (inputCityName.value) {
         const cityName = inputCityName.value;
-        console.log(cityName);
         fetch(Endpoints.weatherapi.replace("city", cityName), {
             method: "GET",
         })
@@ -240,7 +259,6 @@ function findCity() {
             return response.json();
         })
             .then((data) => {
-            // console.log(data);
             outCityName.textContent = data.location.name;
             outCountryName.textContent = data.location.country;
             outLocalTime.textContent = data.location.localtime;
@@ -269,5 +287,61 @@ function addCity() {
     })
         .then((data) => {
         location.reload();
+    });
+}
+function addCityWindow() {
+    const blackground = document.querySelector(".add-city-blackground");
+    const addCityWindow = document.querySelector(".add-city");
+    addCityWindow.style.display = "block";
+    blackground.style.display = "block";
+}
+function delCityWindow() {
+    const blackground = document.querySelector(".add-city-blackground");
+    const delCityWindow = document.querySelector(".del-city");
+    delCityWindow.style.display = "block";
+    blackground.style.display = "block";
+}
+function closeAddDelWindows() {
+    const blackground = document.querySelector(".add-city-blackground");
+    const addCityWindow = document.querySelector(".add-city");
+    const delCityWindow = document.querySelector(".del-city");
+    const box = document.querySelector(".del-city__cities");
+    addCityWindow.style.display = "none";
+    blackground.style.display = "none";
+    delCityWindow.style.display = "none";
+    box.innerHTML = "";
+}
+function addCitiesToDel() {
+    const box = document.querySelector(".del-city__cities");
+    box.innerHTML = "";
+    cities.forEach((city) => {
+        const CityToDel = document.createElement("p");
+        CityToDel.className = "del-city__cities__city";
+        CityToDel.innerHTML = city[1];
+        box === null || box === void 0 ? void 0 : box.appendChild(CityToDel);
+    });
+}
+function delCity(target) {
+    const buttonsCitiesToDel = document.querySelectorAll(".del-city__cities__city");
+    buttonsCitiesToDel.forEach((button, i) => {
+        if (target === button) {
+            console.log(cities);
+            console.log("deletign: ", cities[i]);
+            button.remove();
+            fetch(Endpoints.weatherLinks, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    authorization: localStorage.getItem("Ltoken"),
+                },
+                body: JSON.stringify({ indexToDelete: cities[i][0] }),
+            }).then((response) => {
+                if (response.ok) {
+                    document.querySelector(".main").innerHTML = "";
+                    fetchFollowedCities();
+                }
+            });
+            // .then(() => {});
+        }
     });
 }
