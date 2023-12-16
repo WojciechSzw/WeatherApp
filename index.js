@@ -100,7 +100,7 @@ function login() {
         })
             .then((response) => {
             if (!response.ok) {
-                document.querySelector(".login-box__login-form__wrongUsernamePassword").style.visibility = "visible";
+                document.querySelector(".login-box__login-form__wrongUsernamePassword").style.display = "block";
                 throw new Error(`Network response was not ok: ${response.statusText}`);
             }
             return response.json();
@@ -129,7 +129,7 @@ function register() {
             passwordsNotMatch === null)
             return;
         if (password.value !== password2.value) {
-            console.log("passwords dont match each other");
+            usernameInUse.style.display = "none";
             passwordsNotMatch.style.display = "block";
             return;
         }

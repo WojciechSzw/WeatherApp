@@ -136,7 +136,7 @@ async function login() {
       if (!response.ok) {
         document.querySelector<HTMLElement>(
           ".login-box__login-form__wrongUsernamePassword"
-        )!.style.visibility = "visible";
+        )!.style.display = "block";
         throw new Error(`Network response was not ok: ${response.statusText}`);
       }
       return response.json() as Promise<{ accessToken: string }>;
@@ -179,7 +179,7 @@ async function register() {
   )
     return;
   if (password.value !== password2.value) {
-    console.log("passwords dont match each other");
+    usernameInUse.style.display = "none";
     passwordsNotMatch.style.display = "block";
     return;
   }
