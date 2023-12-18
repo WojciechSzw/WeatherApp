@@ -104,11 +104,14 @@ function login() {
                 throw new Error(`Network response was not ok: ${response.statusText}`);
             }
             return response.json();
+            // as Promise<{ accessToken: string }>;
         })
             .then((data) => {
             tokensData = data;
             localStorage.setItem("Ltoken", data.accessToken);
             localStorage.setItem("RToken", data.refreshToken);
+            localStorage.setItem("backgroundImg", data.backgroundImg);
+            localStorage.setItem("profileImg", data.profileImg);
             window.location.href = "weather.html";
         });
     });

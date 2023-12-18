@@ -22,7 +22,22 @@ document.addEventListener("click", (event) => {
     delCity(target);
   }
 });
+
 fetchFollowedCities();
+initProfile();
+
+function initProfile() {
+  document.querySelector(
+    "body"
+  )!.style.backgroundImage = `url(images/backgrounds/${localStorage.getItem(
+    "backgroundImg"
+  )}.jpg)`;
+  document.querySelector<HTMLElement>(
+    ".menu__short__upper__img"
+  )!.style.backgroundImage = `url(images/users/${localStorage.getItem(
+    "profileImg"
+  )}.jpg)`;
+}
 function fetchFollowedCities() {
   fetch(Endpoints.weatherLinks, {
     method: "GET",

@@ -15,7 +15,7 @@ $smallScreenSize: 940px;
 
 body {
   background-color: rgb(85, 85, 85);
-  background-image: url(images/rainglass.jpg);
+  background-image: url(images/backgrounds/1.jpg);
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -41,7 +41,7 @@ body {
       flex-direction: column;
       align-items: center;
       &__img {
-        background-image: url(images/users/NoFoto.jpg);
+        background-image: url(images/users/1.jpg);
         background-size: contain;
         border-radius: 50%;
         width: 60px;

@@ -139,12 +139,16 @@ async function login() {
         )!.style.display = "block";
         throw new Error(`Network response was not ok: ${response.statusText}`);
       }
-      return response.json() as Promise<{ accessToken: string }>;
+      return response.json();
+      // as Promise<{ accessToken: string }>;
     })
     .then((data) => {
       tokensData = data as any;
       localStorage.setItem("Ltoken", (data as any).accessToken);
       localStorage.setItem("RToken", (data as any).refreshToken);
+      localStorage.setItem("backgroundImg", data.backgroundImg);
+      localStorage.setItem("profileImg", data.profileImg);
+
       window.location.href = "weather.html";
     });
 }
