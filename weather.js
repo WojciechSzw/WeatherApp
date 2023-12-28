@@ -40,32 +40,17 @@ function fetchFollowedCities() {
     })
         .then((response) => {
         if (!response.ok) {
-            window.location.replace("/");
             throw new Error(`Network response was not ok: ${response.statusText}`);
         }
         return response.json();
     })
         .then((data) => {
-        fetchAllWeatherLinks(data);
-    });
-}
-function fetchAllWeatherLinks(data) {
-    cities = [];
-    data.forEach((element) => {
-        fetch(element.apiLink, {
-            method: "GET",
-        })
-            .then((response) => {
-            if (!response.ok) {
-                throw new Error("apiLink response was not ok: " + response.statusText);
-            }
-            return response.json();
-        })
-            .then((data) => {
-            generateWeatherTiles(data);
-            cities.push([element.id, data.location.name]);
+        data.forEach((city) => {
+            cities.push([city[0], city[1].location.name]);
+            generateWeatherTiles(city[1]);
         });
     });
+    console.log(cities);
 }
 function generateWeatherTiles(data) {
     var _a;
@@ -250,10 +235,15 @@ function findCity() {
     const addBtn = document.querySelector(".add-city__result__submit-off");
     if (inputCityName.value) {
         const cityName = inputCityName.value;
-        fetch(Endpoints.weatherapi.replace("city", cityName), {
+        fetch(Endpoints.findCity + "?cityName=" + cityName, {
             method: "GET",
+            headers: {
+                authorization: localStorage.getItem("Ltoken"),
+                "Content-type": "application/json",
+            },
         })
             .then((response) => {
+            console.log(response);
             outCityName.textContent = "";
             outCountryName.textContent = "";
             outLocalTime.textContent = "";
@@ -280,11 +270,11 @@ function addCity() {
             "Content-type": "application/json",
         },
         body: JSON.stringify({
-            apiLink: Endpoints.weatherapi.replace("city", outCityName),
             cityName: outCityName,
         }),
     })
         .then((response) => {
+        console.log(response);
         if (!response.ok) {
             throw new Error(`Network response was not ok: ${response.statusText}`);
         }
@@ -339,7 +329,7 @@ function delCity(target) {
                     "Content-Type": "application/json",
                     authorization: localStorage.getItem("Ltoken"),
                 },
-                body: JSON.stringify({ indexToDelete: cities[i][0] }),
+                body: JSON.stringify({ idToDel: cities[i][0] }),
             }).then((response) => {
                 if (response.ok) {
                     document.querySelector(".main").innerHTML = "";

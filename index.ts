@@ -4,8 +4,7 @@ export const Endpoints = {
   logout: "http://localhost:3000/logout",
   refreshToken: "http://localhost:3000/token",
   weatherLinks: "http://localhost:3000/weather",
-  weatherapi:
-    "https://api.weatherapi.com/v1/forecast.json?key=7208f54d803847c09c1155442231811&q=city&days=5&aqi=no&alerts=no",
+  findCity: "http://localhost:3000/findCity",
 } as const;
 
 let tokensData: { accessToken: string; refreshToken: string };
