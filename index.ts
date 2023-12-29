@@ -1,13 +1,10 @@
 export const Endpoints = {
-  login: "http://localhost:3000/login",
-  register: "http://localhost:3000/register",
-  logout: "http://localhost:3000/logout",
-  refreshToken: "http://localhost:3000/token",
-  weatherLinks: "http://localhost:3000/weather",
-  findCity: "http://localhost:3000/findCity",
+  login: "https://weather.rdk31.com/login",
+  register: "https://weather.rdk31.com/register",
+  logout: "https://weather.rdk31.com/logout",
+  weatherLinks: "https://weather.rdk31.com/weather",
+  findCity: "https://weather.rdk31.com/findCity",
 } as const;
-
-let tokensData: { accessToken: string; refreshToken: string };
 
 document.addEventListener("click", (event) => {
   if (
@@ -139,12 +136,11 @@ async function login() {
         throw new Error(`Network response was not ok: ${response.statusText}`);
       }
       return response.json();
-      // as Promise<{ accessToken: string }>;
     })
     .then((data) => {
-      tokensData = data as any;
-      localStorage.setItem("Ltoken", (data as any).accessToken);
-      localStorage.setItem("RToken", (data as any).refreshToken);
+      console.log(data);
+      localStorage.setItem("Ltoken", data.accessToken);
+      localStorage.setItem("RToken", data.refreshToken);
       localStorage.setItem("backgroundImg", data.backgroundImg);
       localStorage.setItem("profileImg", data.profileImg);
 

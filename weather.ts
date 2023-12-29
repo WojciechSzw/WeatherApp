@@ -27,6 +27,7 @@ fetchFollowedCities();
 initProfile();
 
 function initProfile() {
+  console.log(localStorage);
   document.querySelector(
     "body"
   )!.style.backgroundImage = `url(images/backgrounds/${localStorage.getItem(
@@ -55,7 +56,6 @@ function fetchFollowedCities() {
         generateWeatherTiles(city[1]);
       });
     });
-  console.log(cities);
 }
 
 function generateWeatherTiles(data: any) {
@@ -105,7 +105,6 @@ function generateWeatherTiles(data: any) {
           
         </div>
 `;
-  // console.log(data.condition.code);
   newWeatherBox.style.backgroundImage = `url(images/weathericons/${data.current.condition.code}.jpg)`;
   function hourlyForecastTiles() {
     let returnedString = "";
@@ -267,7 +266,6 @@ function findCity() {
       },
     })
       .then((response) => {
-        console.log(response);
         outCityName!.textContent = "";
         outCountryName!.textContent = "";
         outLocalTime!.textContent = "";
@@ -356,6 +354,7 @@ function closeAddDelWindows() {
 
 function addCitiesToDel() {
   const box = document.querySelector<HTMLElement>(".del-city__cities");
+  console.log(box);
   box!.innerHTML = "";
   cities.forEach((city) => {
     const CityToDel = document.createElement("p");
@@ -371,8 +370,6 @@ function delCity(target: HTMLElement) {
   );
   buttonsCitiesToDel.forEach((button, i) => {
     if (target === button) {
-      console.log(cities);
-      console.log("deletign: ", cities[i]);
       (button as HTMLElement).remove();
       fetch(Endpoints.weatherLinks, {
         method: "DELETE",

@@ -8,15 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 export const Endpoints = {
-    login: "http://localhost:3000/login",
-    register: "http://localhost:3000/register",
-    logout: "http://localhost:3000/logout",
-    refreshToken: "http://localhost:3000/token",
-    weatherLinks: "http://localhost:3000/weather",
-    findCity: "http://localhost:3000/findCity",
-    weatherapi: "https://api.weatherapi.com/v1/forecast.json?key=7208f54d803847c09c1155442231811&q=city&days=5&aqi=no&alerts=no",
+    login: "https://weather.rdk31.com/login",
+    register: "https://weather.rdk31.com/register",
+    logout: "https://weather.rdk31.com/logout",
+    weatherLinks: "https://weather.rdk31.com/weather",
+    findCity: "https://weather.rdk31.com/findCity",
 };
-let tokensData;
 document.addEventListener("click", (event) => {
     if ((event === null || event === void 0 ? void 0 : event.target).classList.contains("login-box__choose-tab__register")) {
         tabsLoginBox.clickedRegister();
@@ -105,10 +102,9 @@ function login() {
                 throw new Error(`Network response was not ok: ${response.statusText}`);
             }
             return response.json();
-            // as Promise<{ accessToken: string }>;
         })
             .then((data) => {
-            tokensData = data;
+            console.log(data);
             localStorage.setItem("Ltoken", data.accessToken);
             localStorage.setItem("RToken", data.refreshToken);
             localStorage.setItem("backgroundImg", data.backgroundImg);
