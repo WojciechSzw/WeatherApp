@@ -18,14 +18,23 @@ document.addEventListener("click", (event) => {
     if ((event === null || event === void 0 ? void 0 : event.target).classList.contains("login-box__choose-tab__register")) {
         tabsLoginBox.clickedRegister();
     }
-    if ((event === null || event === void 0 ? void 0 : event.target).classList.contains("login-box__choose-tab__login")) {
+    else if ((event === null || event === void 0 ? void 0 : event.target).classList.contains("login-box__choose-tab__login")) {
         tabsLoginBox.clickedLogin();
     }
-    if ((event === null || event === void 0 ? void 0 : event.target).classList.contains("login-box__login-form__submit")) {
+    else if ((event === null || event === void 0 ? void 0 : event.target).classList.contains("login-box__login-form__submit")) {
         login();
     }
-    if ((event === null || event === void 0 ? void 0 : event.target).classList.contains("login-box__register-form__submit")) {
+    else if ((event === null || event === void 0 ? void 0 : event.target).classList.contains("login-box__register-form__submit")) {
         register();
+    }
+    else if ((event === null || event === void 0 ? void 0 : event.target).classList.contains("fa-house-user")) {
+        window.open("https://wojciechszw.github.io/Portfolio/", "_blank");
+    }
+    else if ((event === null || event === void 0 ? void 0 : event.target).classList.contains("fa-square-github")) {
+        window.open("https://github.com/WojciechSzw", "_blank");
+    }
+    else if ((event === null || event === void 0 ? void 0 : event.target).classList.contains("fa-linkedin")) {
+        window.open("https://www.linkedin.com/in/wojciech-szwarc-7053831ab/", "_blank");
     }
 });
 const tabsLoginBox = {
@@ -104,7 +113,6 @@ function login() {
             return response.json();
         })
             .then((data) => {
-            console.log(data);
             localStorage.setItem("Ltoken", data.accessToken);
             localStorage.setItem("RToken", data.refreshToken);
             localStorage.setItem("backgroundImg", data.backgroundImg);

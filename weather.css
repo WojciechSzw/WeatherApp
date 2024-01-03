@@ -146,6 +146,7 @@ body {
   grid-template-areas: "cityname cityname cityname cityname cityname cityname" "date date date date date date" "hr1 hr1 hr1 hr1 hr1 hr1" "actualTemperature actualTemperature actualTemperature actualTemperature actualTemperature actualTemperature" "rain rain rain wind wind wind" "hr2 hr2 hr2 hr2 hr2 hr2" "hourlyWeather hourlyWeather hourlyWeather hourlyWeather hourlyWeather hourlyWeather";
 }
 .main__weather-box__today-info__cityName {
+  text-align: center;
   grid-area: cityname;
   font-size: 30px;
   color: rgb(22, 37, 54);
@@ -442,19 +443,17 @@ body {
 }
 .del-city__cities {
   margin: 10px 0 0;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
   overflow-y: scroll;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
   height: 370px;
+  max-height: 370px;
   width: calc(100% - 4px);
   border-radius: 20px;
   border: solid rgb(121, 120, 120) 2px;
 }
 .del-city__cities__city {
+  margin: 5px 0;
+  margin-right: auto;
+  margin-left: auto;
   cursor: pointer;
   display: flex;
   align-items: center;

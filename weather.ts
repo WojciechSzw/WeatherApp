@@ -27,7 +27,6 @@ fetchFollowedCities();
 initProfile();
 
 function initProfile() {
-  console.log(localStorage);
   document.querySelector(
     "body"
   )!.style.backgroundImage = `url(images/backgrounds/${localStorage.getItem(
@@ -51,6 +50,7 @@ function fetchFollowedCities() {
       return response.json();
     })
     .then((data) => {
+      cities = [];
       data.forEach((city: any) => {
         cities.push([city[0], city[1].location.name]);
         generateWeatherTiles(city[1]);
@@ -197,31 +197,31 @@ function getDayTime(data: any) {
   }
   returnedString += ", " + date.substring(8, 10) + " ";
   switch (date.substring(5, 7)) {
-    case "1":
+    case "01":
       returnedString += "January";
       break;
-    case "2":
+    case "02":
       returnedString += "February";
       break;
-    case "3":
+    case "03":
       returnedString += "March";
       break;
-    case "4":
+    case "04":
       returnedString += "April";
       break;
-    case "5":
+    case "05":
       returnedString += "May";
       break;
-    case "6":
+    case "06":
       returnedString += "June";
       break;
-    case "7":
+    case "07":
       returnedString += "July";
       break;
-    case "8":
+    case "08":
       returnedString += "August";
       break;
-    case "9":
+    case "09":
       returnedString += "September";
       break;
     case "10":
@@ -350,6 +350,7 @@ function closeAddDelWindows() {
 
   delCityWindow!.style.display = "none";
   box!.innerHTML = "";
+  console.log(box!.innerHTML);
 }
 
 function addCitiesToDel() {
@@ -369,22 +370,28 @@ function delCity(target: HTMLElement) {
     ".del-city__cities__city"
   );
   buttonsCitiesToDel.forEach((button, i) => {
+    let idToDel = -1;
     if (target === button) {
-      (button as HTMLElement).remove();
+      for (let x = 0; x < cities.length; x++) {
+        if (cities[x][1] === button.textContent) {
+          idToDel = cities[x][0];
+          x = cities.length;
+        }
+      }
+      button.remove();
       fetch(Endpoints.weatherLinks, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           authorization: localStorage.getItem("Ltoken") as string,
         },
-        body: JSON.stringify({ idToDel: cities[i][0] }),
+        body: JSON.stringify({ idToDel }),
       }).then((response) => {
         if (response.ok) {
           document.querySelector(".main")!.innerHTML = "";
           fetchFollowedCities();
         }
       });
-      // .then(() => {});
     }
   });
 }

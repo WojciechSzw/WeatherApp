@@ -13,27 +13,37 @@ document.addEventListener("click", (event) => {
     )
   ) {
     tabsLoginBox.clickedRegister();
-  }
-  if (
+  } else if (
     (event?.target as HTMLElement).classList.contains(
       "login-box__choose-tab__login"
     )
   ) {
     tabsLoginBox.clickedLogin();
-  }
-  if (
+  } else if (
     (event?.target as HTMLElement).classList.contains(
       "login-box__login-form__submit"
     )
   ) {
     login();
-  }
-  if (
+  } else if (
     (event?.target as HTMLElement).classList.contains(
       "login-box__register-form__submit"
     )
   ) {
     register();
+  } else if (
+    (event?.target as HTMLElement).classList.contains("fa-house-user")
+  ) {
+    window.open("https://wojciechszw.github.io/Portfolio/", "_blank");
+  } else if (
+    (event?.target as HTMLElement).classList.contains("fa-square-github")
+  ) {
+    window.open("https://github.com/WojciechSzw", "_blank");
+  } else if ((event?.target as HTMLElement).classList.contains("fa-linkedin")) {
+    window.open(
+      "https://www.linkedin.com/in/wojciech-szwarc-7053831ab/",
+      "_blank"
+    );
   }
 });
 
@@ -138,7 +148,6 @@ async function login() {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       localStorage.setItem("Ltoken", data.accessToken);
       localStorage.setItem("RToken", data.refreshToken);
       localStorage.setItem("backgroundImg", data.backgroundImg);
