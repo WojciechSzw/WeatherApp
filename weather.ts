@@ -1,6 +1,23 @@
 import { Endpoints } from "./index.js";
 let cities: [nr: number, cityName: string][] = [];
 
+type DataApi = {
+  location: { name: string };
+  current: { temp_c: string; wind_kph: string; condition: { code: number } };
+  forecast: { forecastday: Forecastday[] };
+};
+
+type Forecastday = {
+  date: Date;
+  day: { daily_chance_of_rain: number; avgtemp_c: number };
+  hour: HourForecast[];
+};
+
+type HourForecast = {
+  chance_of_rain: number;
+  temp_c: number;
+};
+
 document.addEventListener("click", (event) => {
   const target = event.target as HTMLElement;
   if (target.classList.contains("menu__short__upper__img")) {
@@ -38,6 +55,7 @@ function initProfile() {
     "profileImg"
   )}.jpg)`;
 }
+
 function fetchFollowedCities() {
   fetch(Endpoints.weatherLinks, {
     method: "GET",
@@ -58,7 +76,7 @@ function fetchFollowedCities() {
     });
 }
 
-function generateWeatherTiles(data: any) {
+function generateWeatherTiles(data: DataApi) {
   var newWeatherBox = document.createElement("div");
   newWeatherBox.className = "main__weather-box";
 
@@ -132,7 +150,7 @@ function generateWeatherTiles(data: any) {
     return returnedString;
 
     function day(x: number) {
-      const futureDay = new Date(data.forecast.forecastday[x].date).getDay();
+      const futureDay = data.forecast.forecastday[x].date.getDay();
       let dayName = "";
       switch (futureDay) {
         case 0:
